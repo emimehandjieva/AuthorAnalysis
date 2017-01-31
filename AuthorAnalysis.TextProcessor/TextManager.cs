@@ -33,7 +33,7 @@ namespace AuthorAnalysis.TextProcessor
             wordCount = book.Text.Split(' ').Count(word =>!String.IsNullOrEmpty(word));
             punctCount = book.Text.Count(c => Char.IsPunctuation(c));
             
-            var pipeline = SummarizeManager.GetPipeLine();
+            var pipeline = PipelineBuilder.GetPipeLine();
 
             // Annotation
             var annotation = new Annotation(book.Text);

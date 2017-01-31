@@ -94,22 +94,7 @@ namespace AuthorAnalysis.Summarizer
             return rawText;
         }
 
-        public static StanfordCoreNLP GetPipeLine()
-        {
-            var t = typeof(com.sun.codemodel.@internal.ClassType); // IKVM.OpenJDK.Tools
-            t = typeof(com.sun.org.apache.xalan.@internal.xsltc.trax.TransformerFactoryImpl); // IKVM.OpenJDK.XML.Transform
-            t = typeof(com.sun.org.glassfish.external.amx.AMX); // IKVM.OpenJDK.XML.WebServices
-
-            var jarRoot = @"..\..\..\..\stanford-corenlp-3.7.0-models";
-            Properties props = new Properties();
-            props.setProperty("annotators", "tokenize, ssplit, pos");
-            props.setProperty("sutime.binders", "0");
-            var curDir = Environment.CurrentDirectory;
-            Directory.SetCurrentDirectory(jarRoot);
-            var pipeline = new StanfordCoreNLP(props);
-            Directory.SetCurrentDirectory(curDir);
-            return pipeline;
-        }
+       
 
         private static void ProcessText()
         {
@@ -123,7 +108,7 @@ namespace AuthorAnalysis.Summarizer
             // Apparently a known isue, this little gimmick seems to solve a nasty System.TypeInitializationException that hopefully won't reappear again
             SetCulture();
             
-            var pipeline = GetPipeLine();
+            var pipeline = PipelineBuilder.GetPipeLine();
 
             // Annotation
             var annotation = new Annotation(rawText);

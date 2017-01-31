@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AuthorAnalysisDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="AuthorID" />
+    </Key>
+    <Property Name="AuthorID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="GenderID" Type="int" />
+    <Property Name="PeriodID" Type="int" />
+    <Property Name="NationalityID" Type="int" />
+    <Property Name="EducationLevelID" Type="int" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="BookID" />
+    </Key>
+    <Property Name="BookID" Type="int" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AverageSentenceWordCount" Type="float" Nullable="false" />
+    <Property Name="PunctoationToWordRatio" Type="float" Nullable="false" />
+    <Property Name="NounToWordRatio" Type="float" Nullable="false" />
+    <Property Name="VerbToWordRatio" Type="float" Nullable="false" />
+    <Property Name="AdjectiveToWordRatio" Type="float" Nullable="false" />
+    <Property Name="AdverbToWordRatio" Type="float" Nullable="false" />
+    <Property Name="AuthorID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Education">
+    <Key>
+      <PropertyRef Name="EdicationLevelID" />
+    </Key>
+    <Property Name="EdicationLevelID" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="GenderID" />
+    </Key>
+    <Property Name="GenderID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Nationality">
+    <Key>
+      <PropertyRef Name="NationalityID" />
+    </Key>
+    <Property Name="NationalityID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Period">
+    <Key>
+      <PropertyRef Name="PeriodID" />
+    </Key>
+    <Property Name="PeriodID" Type="int" Nullable="false" />
+    <Property Name="PeriodName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Author_Education">
+    <End Role="Education" Type="Self.Education" Multiplicity="0..1" />
+    <End Role="Author" Type="Self.Author" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Education">
+        <PropertyRef Name="EdicationLevelID" />
+      </Principal>
+      <Dependent Role="Author">
+        <PropertyRef Name="EducationLevelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Author_Gender">
+    <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+    <End Role="Author" Type="Self.Author" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gender">
+        <PropertyRef Name="GenderID" />
+      </Principal>
+      <Dependent Role="Author">
+        <PropertyRef Name="GenderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Author_Nationality">
+    <End Role="Nationality" Type="Self.Nationality" Multiplicity="0..1" />
+    <End Role="Author" Type="Self.Author" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Nationality">
+        <PropertyRef Name="NationalityID" />
+      </Principal>
+      <Dependent Role="Author">
+        <PropertyRef Name="NationalityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Author_Period">
+    <End Role="Period" Type="Self.Period" Multiplicity="0..1" />
+    <End Role="Author" Type="Self.Author" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Period">
+        <PropertyRef Name="PeriodID" />
+      </Principal>
+      <Dependent Role="Author">
+        <PropertyRef Name="PeriodID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_Author">
+    <End Role="Author" Type="Self.Author" Multiplicity="1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="AuthorID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AuthorAnalysisDataModelStoreContainer">
+    <EntitySet Name="Author" EntityType="Self.Author" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Nationality" EntityType="Self.Nationality" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Author_Education" Association="Self.FK_Author_Education">
+      <End Role="Education" EntitySet="Education" />
+      <End Role="Author" EntitySet="Author" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Author_Gender" Association="Self.FK_Author_Gender">
+      <End Role="Gender" EntitySet="Gender" />
+      <End Role="Author" EntitySet="Author" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Author_Nationality" Association="Self.FK_Author_Nationality">
+      <End Role="Nationality" EntitySet="Nationality" />
+      <End Role="Author" EntitySet="Author" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Author_Period" Association="Self.FK_Author_Period">
+      <End Role="Period" EntitySet="Period" />
+      <End Role="Author" EntitySet="Author" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_Author" Association="Self.FK_Book_Author">
+      <End Role="Author" EntitySet="Author" />
+      <End Role="Book" EntitySet="Book" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

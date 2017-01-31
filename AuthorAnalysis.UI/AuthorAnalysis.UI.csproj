@@ -132,9 +132,9 @@
       <Project>{cc727840-c479-43d6-8c20-2695c710e2d1}</Project>
       <Name>AuthorAnalysis.Summarizer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AuthorAnalysis.TextProcessor\AuthorAnalysis.TextProcessor.csproj">
+    <ProjectReference Include="..\AuthorAnalysis.TextProcessor\AuthorAnalysis.TextAnalyzer.csproj">
       <Project>{db9a6ad8-1580-400c-8608-35d16196ba06}</Project>
-      <Name>AuthorAnalysis.TextProcessor</Name>
+      <Name>AuthorAnalysis.TextAnalyzer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

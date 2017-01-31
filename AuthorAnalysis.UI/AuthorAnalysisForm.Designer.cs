@@ -31,37 +31,37 @@
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBoxEdu = new System.Windows.Forms.ComboBox();
+            this.educationBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.authorAnalysisDataDataSet = new AuthorAnalysis.UI.AuthorAnalysisDataDataSet();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBoxPeriod = new System.Windows.Forms.ComboBox();
+            this.periodBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxAuthorName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBoxNationality = new System.Windows.Forms.ComboBox();
+            this.nationalityBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxGender = new System.Windows.Forms.ComboBox();
+            this.genderBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.authorAnalysisDataDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.buttonTrain = new System.Windows.Forms.Button();
             this.buttonEvaluate = new System.Windows.Forms.Button();
-            this.authorAnalysisDataDataSet = new AuthorAnalysis.UI.AuthorAnalysisDataDataSet();
-            this.authorAnalysisDataDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.genderBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.genderTableAdapter = new AuthorAnalysis.UI.AuthorAnalysisDataDataSetTableAdapters.GenderTableAdapter();
-            this.periodBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.periodTableAdapter = new AuthorAnalysis.UI.AuthorAnalysisDataDataSetTableAdapters.PeriodTableAdapter();
-            this.nationalityBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.nationalityTableAdapter = new AuthorAnalysis.UI.AuthorAnalysisDataDataSetTableAdapters.NationalityTableAdapter();
-            this.educationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.educationTableAdapter = new AuthorAnalysis.UI.AuthorAnalysisDataDataSetTableAdapters.EducationTableAdapter();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.educationBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.authorAnalysisDataDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.authorAnalysisDataDataSetBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.genderBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.periodBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nationalityBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.educationBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.genderBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.authorAnalysisDataDataSetBindingSource)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -94,6 +94,16 @@
             this.comboBoxEdu.TabIndex = 9;
             this.comboBoxEdu.ValueMember = "EdicationLevelID";
             // 
+            // educationBindingSource
+            // 
+            this.educationBindingSource.DataMember = "Education";
+            this.educationBindingSource.DataSource = this.authorAnalysisDataDataSet;
+            // 
+            // authorAnalysisDataDataSet
+            // 
+            this.authorAnalysisDataDataSet.DataSetName = "AuthorAnalysisDataDataSet";
+            this.authorAnalysisDataDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -113,6 +123,11 @@
             this.comboBoxPeriod.Size = new System.Drawing.Size(167, 24);
             this.comboBoxPeriod.TabIndex = 7;
             this.comboBoxPeriod.ValueMember = "PeriodID";
+            // 
+            // periodBindingSource
+            // 
+            this.periodBindingSource.DataMember = "Period";
+            this.periodBindingSource.DataSource = this.authorAnalysisDataDataSet;
             // 
             // label4
             // 
@@ -150,6 +165,11 @@
             this.comboBoxNationality.TabIndex = 3;
             this.comboBoxNationality.ValueMember = "NationalityID";
             // 
+            // nationalityBindingSource
+            // 
+            this.nationalityBindingSource.DataMember = "Nationality";
+            this.nationalityBindingSource.DataSource = this.authorAnalysisDataDataSet;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -178,6 +198,16 @@
             this.comboBoxGender.Size = new System.Drawing.Size(175, 24);
             this.comboBoxGender.TabIndex = 0;
             this.comboBoxGender.ValueMember = "GenderID";
+            // 
+            // genderBindingSource
+            // 
+            this.genderBindingSource.DataMember = "Gender";
+            this.genderBindingSource.DataSource = this.authorAnalysisDataDataSetBindingSource;
+            // 
+            // authorAnalysisDataDataSetBindingSource
+            // 
+            this.authorAnalysisDataDataSetBindingSource.DataSource = this.authorAnalysisDataDataSet;
+            this.authorAnalysisDataDataSetBindingSource.Position = 0;
             // 
             // groupBox2
             // 
@@ -217,48 +247,19 @@
             this.buttonEvaluate.TabIndex = 3;
             this.buttonEvaluate.Text = "Analyze the author";
             this.buttonEvaluate.UseVisualStyleBackColor = true;
-            // 
-            // authorAnalysisDataDataSet
-            // 
-            this.authorAnalysisDataDataSet.DataSetName = "AuthorAnalysisDataDataSet";
-            this.authorAnalysisDataDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // authorAnalysisDataDataSetBindingSource
-            // 
-            this.authorAnalysisDataDataSetBindingSource.DataSource = this.authorAnalysisDataDataSet;
-            this.authorAnalysisDataDataSetBindingSource.Position = 0;
-            // 
-            // genderBindingSource
-            // 
-            this.genderBindingSource.DataMember = "Gender";
-            this.genderBindingSource.DataSource = this.authorAnalysisDataDataSetBindingSource;
+            this.buttonEvaluate.Click += new System.EventHandler(this.buttonEvaluate_Click);
             // 
             // genderTableAdapter
             // 
             this.genderTableAdapter.ClearBeforeFill = true;
             // 
-            // periodBindingSource
-            // 
-            this.periodBindingSource.DataMember = "Period";
-            this.periodBindingSource.DataSource = this.authorAnalysisDataDataSet;
-            // 
             // periodTableAdapter
             // 
             this.periodTableAdapter.ClearBeforeFill = true;
             // 
-            // nationalityBindingSource
-            // 
-            this.nationalityBindingSource.DataMember = "Nationality";
-            this.nationalityBindingSource.DataSource = this.authorAnalysisDataDataSet;
-            // 
             // nationalityTableAdapter
             // 
             this.nationalityTableAdapter.ClearBeforeFill = true;
-            // 
-            // educationBindingSource
-            // 
-            this.educationBindingSource.DataMember = "Education";
-            this.educationBindingSource.DataSource = this.authorAnalysisDataDataSet;
             // 
             // educationTableAdapter
             // 
@@ -280,13 +281,13 @@
             this.Load += new System.EventHandler(this.AuthorAnalysisForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.educationBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.authorAnalysisDataDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.authorAnalysisDataDataSetBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.genderBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.periodBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nationalityBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.educationBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.genderBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.authorAnalysisDataDataSetBindingSource)).EndInit();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

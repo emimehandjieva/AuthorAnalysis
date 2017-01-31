@@ -1,0 +1,10 @@
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.Data\bin\Debug\AuthorAnalysis.Data.dll.config
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.Data\bin\Debug\AuthorAnalysis.Data.dll
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.Data\bin\Debug\AuthorAnalysis.Data.pdb
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.Data\bin\Debug\EntityFramework.dll
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.Data\bin\Debug\EntityFramework.xml
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.Data\obj\Debug\AuthorAnalysis.Data.csprojResolveAssemblyReference.cache
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.Data\obj\Debug\AuthorAnalysis.Data.dll
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.Data\obj\Debug\AuthorAnalysis.Data.pdb

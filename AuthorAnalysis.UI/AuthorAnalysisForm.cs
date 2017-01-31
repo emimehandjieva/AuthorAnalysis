@@ -66,7 +66,7 @@ namespace AuthorAnalysis.UI
                 context.SaveChanges();
                 MessageBox.Show("New author is analized!");
             }
-            catch  (DbEntityValidationException ex)
+            catch  (DbEntityValidationException )
             {
 
                 throw;
@@ -84,6 +84,11 @@ namespace AuthorAnalysis.UI
             this.periodTableAdapter.Fill(this.authorAnalysisDataDataSet.Period);
             // TODO: This line of code loads data into the 'authorAnalysisDataDataSet.Gender' table. You can move, or remove it, as needed.
             this.genderTableAdapter.Fill(this.authorAnalysisDataDataSet.Gender);
+
+        }
+
+        private void buttonEvaluate_Click(object sender, EventArgs e)
+        {
 
         }
     }
