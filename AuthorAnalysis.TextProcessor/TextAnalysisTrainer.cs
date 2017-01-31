@@ -1,4 +1,7 @@
-﻿using AuthorAnalysis.Data;
+﻿using Accord.MachineLearning.VectorMachines;
+using Accord.MachineLearning.VectorMachines.Learning;
+using Accord.Statistics.Kernels;
+using AuthorAnalysis.Data;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,23 +18,57 @@ namespace AuthorAnalysis.TextProcessor
         private static List<string> _stopWords;
 
         private static int K = 10;
-        
 
-        public static void KNearestNEighbours(Book newBook, List<Book> oldBooks)
+        public static void SVM(Book newBook, List<Book> oldBooks)
         {
+            double[][] inputs = oldBooks.Select(book => new double[] { book.Similarity,
+                                                                       book.AverageSentenceWordCount,
+                                                                       book.PunctoationToWordRatio ,
+                                                                       book.NounToWordRatio ,
+                                                                       book.VerbToWordRatio,
+                                                                       book.AdjectiveToWordRatio ,
+                                                                       book.AdverbToWordRatio
+                                                                      }).ToArray();
+
+            int[] outputs = oldBooks.Select(book =>(book.Author.Gender.GenderID)).ToArray();
+
+            var learn = new SequentialMinimalOptimization<Gaussian>()
+            {
+                UseComplexityHeuristic = true,
+                UseKernelEstimation = true
+            };
+
+            SupportVectorMachine<Gaussian> svm = learn.Learn(inputs, outputs);
+            double[] newBookInput = new double[] { newBook.Similarity,
+                                                 newBook.AverageSentenceWordCount,
+                                                 newBook.PunctoationToWordRatio ,
+                                                 newBook.NounToWordRatio ,
+                                                 newBook.VerbToWordRatio,
+                                                 newBook.AdjectiveToWordRatio ,
+                                                 newBook.AdverbToWordRatio
+                                                 };
+            int newGender = (int)svm.Score(newBookInput);
+            newBook.Author.GenderID = newGender;
+        }
+
+
+
+        public static void Classify(Book newBook, List<Book> oldBooks)
+        {
+            IncludeStopWords();
+
             foreach (Book book in oldBooks)
             {
-                book.Similarity =  CompareSimilarity(newBook, book)/ CompareDifferences(newBook, book);
+                book.Similarity = CompareSimilarity(newBook, book) / CompareDifferences(newBook, book);
             }
 
             var chosen = oldBooks.OrderBy(b => b.Similarity).Take(K);
-
-            newBook.Author.Gender = chosen.Select(b => b.Author.Gender).GroupBy(item => item).OrderByDescending(g => g.Count()).Select(g => g.Key).First();
+            
             newBook.Author.Nationality = chosen.Select(b => b.Author.Nationality).GroupBy(item => item).OrderByDescending(g => g.Count()).Select(g => g.Key).First();
             newBook.Author.Period = chosen.Select(b => b.Author.Period).GroupBy(item => item).OrderByDescending(g => g.Count()).Select(g => g.Key).First();
             newBook.Author.Education = chosen.Select(b => b.Author.Education).GroupBy(item => item).OrderByDescending(g => g.Count()).Select(g => g.Key).First();
 
-
+            SVM(newBook, oldBooks);
         }
 
         private static double CompareDifferences(Book newBook, Book oldBook)

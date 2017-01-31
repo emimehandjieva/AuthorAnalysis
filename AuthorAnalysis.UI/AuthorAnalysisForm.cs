@@ -25,8 +25,33 @@ namespace AuthorAnalysis.UI
             context = new AuthorAnalysisDataEntities();
         }
 
+        private bool FormHasEmptyFields
+        {
+           get
+            {
+
+                return richTextBox1.Text == string.Empty || textBoxAuthorName.Text == string.Empty;
+            }
+        }
+
+        private void ProcessBookText()
+        {
+
+            CurrentBook = new Book();
+            CurrentBook.BookID = context.Books.Max(b => b.BookID) + 1;
+            CurrentBook.Text = richTextBox1.Text;
+            TextManager.AnalyzeText(CurrentBook);
+            CurrentBook.Author = CurrentAuthor;
+        }
+
+
         private void buttonTrain_Click(object sender, EventArgs e)
         {
+            if(FormHasEmptyFields)
+            {
+                MessageBox.Show("Author's name or text to analyze are empty,try again!");
+                return;
+            }
 
             int education =Convert.ToInt32( (comboBoxEdu.SelectedItem as DataRowView)[0]);
             int period = Convert.ToInt32((comboBoxPeriod.SelectedItem as DataRowView)[0]);
@@ -52,25 +77,12 @@ namespace AuthorAnalysis.UI
             CurrentAuthor.Gender = context.Genders.Where(g => g.GenderID == gender).First();
             CurrentAuthor.GenderID = gender;
 
-            CurrentBook = new Book();
-            CurrentBook.BookID = context.Books.Max(b => b.BookID) + 1;
-            CurrentBook.Text = richTextBox1.Text;
-            TextManager.AnalyzeText(CurrentBook);
-
+            ProcessBookText();
 
             CurrentBook.Author = CurrentAuthor;
             context.Books.Add(CurrentBook);
             context.Authors.Add(CurrentAuthor);
-            try
-            {
-                context.SaveChanges();
-                MessageBox.Show("New author is analized!");
-            }
-            catch  (DbEntityValidationException )
-            {
-
-                throw;
-            }
+            
             
         }
 
@@ -89,7 +101,34 @@ namespace AuthorAnalysis.UI
 
         private void buttonEvaluate_Click(object sender, EventArgs e)
         {
+            if (FormHasEmptyFields)
+            {
+                MessageBox.Show("Author's name or text to analyze are empty,try again!");
+                return;
+            }
 
+            string name = textBoxAuthorName.Text;
+
+            CurrentAuthor = new Author();
+            CurrentAuthor.Name = name;
+
+            ProcessBookText();
+
+            TextAnalysisTrainer.Classify(CurrentBook, context.Books.ToList());
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                context.SaveChanges();
+                MessageBox.Show("New author is analized!");
+            }
+            catch (DbEntityValidationException)
+            {
+
+                throw;
+            }
         }
     }
 }

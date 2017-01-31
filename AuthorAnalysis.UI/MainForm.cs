@@ -20,16 +20,32 @@ namespace AuthorAnalysis.UI
 
         private void authorSummaryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AuthorSummaryForm  form = new AuthorSummaryForm();
-            form.MdiParent = this;
-            form.Show();
+            if (Application.OpenForms.OfType<AuthorSummaryForm>().Any())
+            {
+                Application.OpenForms.OfType<AuthorSummaryForm>().First().BringToFront();
+            }
+            else
+            {
+                AuthorSummaryForm form = new AuthorSummaryForm();
+                form.Size = this.Size;
+                form.MdiParent = this;
+                form.Show();
+            }
         }
 
         private void authorAnalysisToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AuthorAnalysisForm form = new AuthorAnalysisForm();
-            form.MdiParent = this;
-            form.Show();
+            if (Application.OpenForms.OfType<AuthorAnalysisForm>().Any())
+            {
+                Application.OpenForms.OfType<AuthorAnalysisForm>().First().BringToFront();
+            }
+            else
+            {
+                AuthorAnalysisForm form = new AuthorAnalysisForm();
+                form.Size = this.Size;
+                form.MdiParent = this;
+                form.Show();
+            }
         }
     }
 }

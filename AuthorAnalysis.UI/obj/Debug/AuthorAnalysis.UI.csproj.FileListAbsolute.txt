@@ -55,3 +55,14 @@ C:\Users\Emilia\documents\visual studio 2015\Projects\AuthorAnalysis\AuthorAnaly
 C:\Users\Emilia\documents\visual studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\obj\Debug\AuthorAnalysis.UI.csproj.GenerateResource.Cache
 C:\Users\Emilia\documents\visual studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\obj\Debug\AuthorAnalysis.UI.exe
 C:\Users\Emilia\documents\visual studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\obj\Debug\AuthorAnalysis.UI.pdb
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\Accord.dll.config
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\Accord.MachineLearning.dll
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\Accord.Statistics.dll
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\Accord.Math.dll
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\Accord.dll
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\Accord.Math.Core.dll
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\Accord.MachineLearning.xml
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\Accord.Statistics.xml
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\Accord.Math.xml
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\Accord.xml
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\Accord.Math.Core.xml

@@ -40,7 +40,7 @@
             // textBoxAuthorName
             // 
             this.textBoxAuthorName.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.textBoxAuthorName.Location = new System.Drawing.Point(336, 3);
+            this.textBoxAuthorName.Location = new System.Drawing.Point(336, 12);
             this.textBoxAuthorName.Name = "textBoxAuthorName";
             this.textBoxAuthorName.Size = new System.Drawing.Size(309, 22);
             this.textBoxAuthorName.TabIndex = 1;
@@ -49,9 +49,10 @@
             // buttonGO
             // 
             this.buttonGO.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonGO.Location = new System.Drawing.Point(459, 48);
+            this.buttonGO.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonGO.Location = new System.Drawing.Point(453, 72);
             this.buttonGO.Name = "buttonGO";
-            this.buttonGO.Size = new System.Drawing.Size(75, 23);
+            this.buttonGO.Size = new System.Drawing.Size(75, 35);
             this.buttonGO.TabIndex = 2;
             this.buttonGO.Text = "GO";
             this.buttonGO.UseVisualStyleBackColor = true;
@@ -60,27 +61,27 @@
             // richTextBoxSummary
             // 
             this.richTextBoxSummary.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.richTextBoxSummary.Location = new System.Drawing.Point(527, 143);
+            this.richTextBoxSummary.Location = new System.Drawing.Point(527, 170);
             this.richTextBoxSummary.Name = "richTextBoxSummary";
             this.richTextBoxSummary.ReadOnly = true;
-            this.richTextBoxSummary.Size = new System.Drawing.Size(446, 390);
+            this.richTextBoxSummary.Size = new System.Drawing.Size(446, 363);
             this.richTextBoxSummary.TabIndex = 3;
             this.richTextBoxSummary.Text = "";
             // 
             // richTextBoxArticle
             // 
             this.richTextBoxArticle.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.richTextBoxArticle.Location = new System.Drawing.Point(31, 143);
+            this.richTextBoxArticle.Location = new System.Drawing.Point(31, 170);
             this.richTextBoxArticle.Name = "richTextBoxArticle";
             this.richTextBoxArticle.ReadOnly = true;
-            this.richTextBoxArticle.Size = new System.Drawing.Size(446, 402);
+            this.richTextBoxArticle.Size = new System.Drawing.Size(446, 375);
             this.richTextBoxArticle.TabIndex = 4;
             this.richTextBoxArticle.Text = "";
             // 
             // progressBar1
             // 
             this.progressBar1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.progressBar1.Location = new System.Drawing.Point(336, 89);
+            this.progressBar1.Location = new System.Drawing.Point(336, 125);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(309, 23);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
@@ -100,12 +101,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.ClientSize = new System.Drawing.Size(985, 545);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.richTextBoxArticle);
             this.Controls.Add(this.richTextBoxSummary);
             this.Controls.Add(this.buttonGO);
             this.Controls.Add(this.textBoxAuthorName);
+            this.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AuthorSummaryForm";
             this.ShowIcon = false;
             this.Text = "Summary";

@@ -37,30 +37,32 @@
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.DarkBlue;
+            this.menuStrip1.BackColor = System.Drawing.Color.RosyBrown;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.authorSummaryToolStripMenuItem,
             this.authorAnalysisToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1485, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1485, 34);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // authorSummaryToolStripMenuItem
             // 
-            this.authorSummaryToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.authorSummaryToolStripMenuItem.Font = new System.Drawing.Font("Berlin Sans FB", 12F, System.Drawing.FontStyle.Bold);
+            this.authorSummaryToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.authorSummaryToolStripMenuItem.Name = "authorSummaryToolStripMenuItem";
-            this.authorSummaryToolStripMenuItem.Size = new System.Drawing.Size(132, 24);
+            this.authorSummaryToolStripMenuItem.Size = new System.Drawing.Size(185, 30);
             this.authorSummaryToolStripMenuItem.Text = "Author Summary";
             this.authorSummaryToolStripMenuItem.Click += new System.EventHandler(this.authorSummaryToolStripMenuItem_Click);
             // 
             // authorAnalysisToolStripMenuItem
             // 
-            this.authorAnalysisToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.authorAnalysisToolStripMenuItem.Font = new System.Drawing.Font("Berlin Sans FB", 12F, System.Drawing.FontStyle.Bold);
+            this.authorAnalysisToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.authorAnalysisToolStripMenuItem.Name = "authorAnalysisToolStripMenuItem";
-            this.authorAnalysisToolStripMenuItem.Size = new System.Drawing.Size(123, 24);
+            this.authorAnalysisToolStripMenuItem.Size = new System.Drawing.Size(174, 30);
             this.authorAnalysisToolStripMenuItem.Text = "Author Analysis";
             this.authorAnalysisToolStripMenuItem.Click += new System.EventHandler(this.authorAnalysisToolStripMenuItem_Click);
             // 
@@ -71,6 +73,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1485, 653);
             this.Controls.Add(this.menuStrip1);
+            this.Font = new System.Drawing.Font("Britannic Bold", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
