@@ -21,5 +21,10 @@ namespace AuthorAnalysis.Data
                 similarity = value;
             }
         }
+
+        public string TempAuthorName
+        {
+            get; set;
+        }
     }
 }

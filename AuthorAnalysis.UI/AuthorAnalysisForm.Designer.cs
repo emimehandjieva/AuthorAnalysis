@@ -55,6 +55,8 @@
             this.nationalityTableAdapter = new AuthorAnalysis.UI.AuthorAnalysisDataDataSetTableAdapters.NationalityTableAdapter();
             this.educationTableAdapter = new AuthorAnalysis.UI.AuthorAnalysisDataDataSetTableAdapters.EducationTableAdapter();
             this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonImport = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.educationBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.authorAnalysisDataDataSet)).BeginInit();
@@ -254,7 +256,7 @@
             this.buttonTrain.BackColor = System.Drawing.Color.Transparent;
             this.buttonTrain.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonTrain.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.buttonTrain.Location = new System.Drawing.Point(317, 97);
+            this.buttonTrain.Location = new System.Drawing.Point(141, 108);
             this.buttonTrain.Name = "buttonTrain";
             this.buttonTrain.Size = new System.Drawing.Size(153, 35);
             this.buttonTrain.TabIndex = 2;
@@ -267,7 +269,7 @@
             this.buttonEvaluate.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.buttonEvaluate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonEvaluate.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.buttonEvaluate.Location = new System.Drawing.Point(638, 97);
+            this.buttonEvaluate.Location = new System.Drawing.Point(847, 108);
             this.buttonEvaluate.Name = "buttonEvaluate";
             this.buttonEvaluate.Size = new System.Drawing.Size(165, 35);
             this.buttonEvaluate.TabIndex = 3;
@@ -305,13 +307,34 @@
             this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
+            // buttonImport
+            // 
+            this.buttonImport.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.buttonImport.BackColor = System.Drawing.Color.Transparent;
+            this.buttonImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonImport.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.buttonImport.Location = new System.Drawing.Point(509, 108);
+            this.buttonImport.Name = "buttonImport";
+            this.buttonImport.Size = new System.Drawing.Size(153, 35);
+            this.buttonImport.TabIndex = 5;
+            this.buttonImport.Text = "Import";
+            this.buttonImport.UseVisualStyleBackColor = false;
+            this.buttonImport.Visible = false;
+            this.buttonImport.Click += new System.EventHandler(this.buttonImport_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // AuthorAnalysisForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.ClientSize = new System.Drawing.Size(1199, 611);
+            this.Controls.Add(this.buttonImport);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonEvaluate);
             this.Controls.Add(this.buttonTrain);
@@ -364,5 +387,7 @@
         private System.Windows.Forms.BindingSource educationBindingSource;
         private AuthorAnalysisDataDataSetTableAdapters.EducationTableAdapter educationTableAdapter;
         private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button buttonImport;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

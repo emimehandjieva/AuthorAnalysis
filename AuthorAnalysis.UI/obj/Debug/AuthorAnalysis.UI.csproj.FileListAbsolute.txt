@@ -66,3 +66,10 @@ C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnaly
 C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\Accord.Math.xml
 C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\Accord.xml
 C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\Accord.Math.Core.xml
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\LinqToExcel.dll
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\log4net.dll
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\Remotion.Data.Linq.dll
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\Remotion.dll
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\Remotion.Interfaces.dll
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\LinqToExcel.xml
+C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\log4net.xml
