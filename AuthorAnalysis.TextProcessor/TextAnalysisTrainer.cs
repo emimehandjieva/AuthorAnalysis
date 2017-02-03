@@ -57,7 +57,7 @@ namespace AuthorAnalysis.TextProcessor
 
             foreach (Book book in oldBooks)
             {
-                book.Similarity = (CompareSimilarity(newBook, book) + CompareNERSimilarity(newBook, book)) / CompareDifferences(newBook, book) ;
+                book.Similarity = CompareSimilarity(newBook, book)/ CompareDifferences(newBook, book) ;
             }
 
             var chosen = oldBooks.OrderBy(b => b.Similarity).Take(K);

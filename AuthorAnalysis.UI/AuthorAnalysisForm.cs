@@ -49,11 +49,11 @@ namespace AuthorAnalysis.UI
             CurrentBook.BookID = context.Books.Max(b => b.BookID) + 1;
             CurrentBook.Text = richTextBox1.Text;
             TextManager.AnalyzeText(CurrentBook);
-            int counter = context.NamedEntities.Max(e => e.NamedEntityID) + 1;
-            foreach (var entiry in CurrentBook.NamedEntities)
-            {
-                entiry.NamedEntityID = counter;counter++;
-            }
+            //int counter = context.NamedEntities.Max(e => e.NamedEntityID) + 1;
+            //foreach (var entiry in CurrentBook.NamedEntities)
+            //{
+            //    entiry.NamedEntityID = counter;counter++;
+            //}
 
             CurrentBook.Author = CurrentAuthor;
         }

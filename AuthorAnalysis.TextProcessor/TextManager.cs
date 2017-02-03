@@ -31,10 +31,10 @@ namespace AuthorAnalysis.TextProcessor
         {
             ResetVariables();
             wordCount = book.Text.Split(' ').Count(word =>!String.IsNullOrEmpty(word));
-            Dictionary<string, int> entities = new Dictionary<string, int>();
+            //Dictionary<string, int> entities = new Dictionary<string, int>();
             punctCount = book.Text.Count(c => Char.IsPunctuation(c));
             
-            var pipeline = PipelineBuilder.GetPipeLineWithNamedEntities();
+            var pipeline = PipelineBuilder.GetPipeLine();
 
             // Annotation
             var annotation = new Annotation(book.Text);
@@ -59,23 +59,23 @@ namespace AuthorAnalysis.TextProcessor
                     var word = token.get(new CoreAnnotations.TextAnnotation().getClass()) as string;
                     var pos = token.get(new CoreAnnotations.PartOfSpeechAnnotation().getClass()) as string;
                     var ner = token.get(new  CoreAnnotations.NamedEntityTagAnnotation().getClass()) as string;
-                    if (entities.ContainsKey(ner))
-                    {
-                        entities[ner]++;
-                    }
-                    else
-                    {
-                        entities.Add(ner, 1);
-                    }
+                    //if (entities.ContainsKey(ner))
+                    //{
+                    //    entities[ner]++;
+                    //}
+                    //else
+                    //{
+                    //    entities.Add(ner, 1);
+                    //}
                     AnalyzePOSTag(pos);
                 }
             }
 
 
-            foreach (var entity in entities)
-            {
-                book.NamedEntities.Add(new NamedEntity() { BookID = book.BookID, NamedEntity1 = entity.Key, NumberOfOccurences = entity.Value });
-            }
+            //foreach (var entity in entities)
+            //{
+            //    book.NamedEntities.Add(new NamedEntity() { BookID = book.BookID, NamedEntity1 = entity.Key, NumberOfOccurences = entity.Value });
+            //}
 
             book.AdjectiveToWordRatio = adjCount / wordCount;
             book.AdverbToWordRatio = advCount / wordCount;
