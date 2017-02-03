@@ -31,5 +31,6 @@ namespace AuthorAnalysis.Data
         public virtual DbSet<Gender> Genders { get; set; }
         public virtual DbSet<Nationality> Nationalities { get; set; }
         public virtual DbSet<Period> Periods { get; set; }
+        public virtual DbSet<NamedEntity> NamedEntities { get; set; }
     }
 }

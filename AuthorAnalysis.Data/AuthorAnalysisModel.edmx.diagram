@@ -16,6 +16,8 @@
         <AssociationConnector Association="AuthorAnalysisDataModel.FK_Author_Nationality" ManuallyRouted="false" />
         <AssociationConnector Association="AuthorAnalysisDataModel.FK_Author_Period" ManuallyRouted="false" />
         <AssociationConnector Association="AuthorAnalysisDataModel.FK_Book_Author" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AuthorAnalysisDataModel.NamedEntity" Width="1.5" PointX="7.5" PointY="1.75" />
+        <AssociationConnector Association="AuthorAnalysisDataModel.FK_NamedEntities_Book" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -19,7 +19,10 @@ namespace AuthorAnalysis.UI
         AuthorAnalysisDataEntities context;
         Book CurrentBook;
         Author CurrentAuthor;
-        double correct;
+        double correctGender;
+        double correctEducation;
+        double correctNationality;
+        double correctPeriod;
         double total;
 
 
@@ -27,6 +30,7 @@ namespace AuthorAnalysis.UI
         {
             InitializeComponent();
             context = new AuthorAnalysisDataEntities();
+            
         }
 
         private bool FormHasEmptyFields
@@ -45,6 +49,12 @@ namespace AuthorAnalysis.UI
             CurrentBook.BookID = context.Books.Max(b => b.BookID) + 1;
             CurrentBook.Text = richTextBox1.Text;
             TextManager.AnalyzeText(CurrentBook);
+            int counter = context.NamedEntities.Max(e => e.NamedEntityID) + 1;
+            foreach (var entiry in CurrentBook.NamedEntities)
+            {
+                entiry.NamedEntityID = counter;counter++;
+            }
+
             CurrentBook.Author = CurrentAuthor;
         }
 
@@ -92,6 +102,7 @@ namespace AuthorAnalysis.UI
             context.Books.Add(CurrentBook);
             context.Authors.Add(CurrentAuthor);
 
+            MessageBox.Show("Book Analyzed!");
 
         }
 
@@ -125,12 +136,37 @@ namespace AuthorAnalysis.UI
 
             ProcessBookText();
 
-            TextAnalysisTrainer.Classify(CurrentBook, context.Books.ToList());
+            TextAnalysisTrainer.Classify(CurrentBook, context.Books.ToList(),CurrentAuthor);
+            CurrentAuthor.Gender = context.Genders.Where(g => g.GenderID == CurrentAuthor.GenderID).First();
+            
+            comboBoxGender.SelectedIndex = comboBoxGender.FindString( CurrentAuthor.Gender.Name);
+            comboBoxNationality.SelectedIndex = comboBoxNationality.FindString(CurrentAuthor.Nationality.Name);
+            comboBoxPeriod.SelectedIndex = comboBoxPeriod.FindString(CurrentAuthor.Period.PeriodName);
+            comboBoxEdu.SelectedIndex = comboBoxEdu.FindString(CurrentAuthor.Education.Description);
 
-            MessageBox.Show("New author is analized!");
 
-             //comboBoxEdu.FindStringExact
+            FeedBackForm form = new FeedBackForm();
+            form.ShowDialog();
 
+            if(form.Education)
+            {
+                this.correctEducation++;
+            }
+
+            if (form.Gender)
+            {
+                this.correctGender++;
+            }
+            if (form.Period)
+            {
+                this.correctPeriod++;
+            }
+            if (form.Nationality)
+            {
+                this.correctNationality++;
+            }
+            total++;
+            
             context.Books.Add(CurrentBook);
             context.Authors.Add(CurrentAuthor);
         }
@@ -203,13 +239,9 @@ namespace AuthorAnalysis.UI
             {
                 TakeAuthorData();
 
-                if (MessageBox.Show("Correct classification?", "Please give feedback", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    correct++;
-                }
-                total++;
 
                 context.SaveChanges();
+                context = new AuthorAnalysisDataEntities();
                 MessageBox.Show("Data Saved!");
             }
             catch (DbEntityValidationException)
@@ -217,6 +249,15 @@ namespace AuthorAnalysis.UI
 
                 throw;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string resultG = string.Format("Correctly classified gender: {0} %", (correctGender*100 / total).ToString());
+            string resultE = string.Format("Correctly classified education: {0} %", (correctEducation * 100 / total).ToString());
+            string resultN = string.Format("Correctly classified nationality: {0} %", (correctNationality * 100 / total).ToString());
+            string resultP = string.Format("Correctly classified period: {0} %", (correctPeriod * 100 / total).ToString());
+            MessageBox.Show(resultG + Environment.NewLine + resultE + Environment.NewLine + resultN + Environment.NewLine + resultP + Environment.NewLine);
         }
     }
 }

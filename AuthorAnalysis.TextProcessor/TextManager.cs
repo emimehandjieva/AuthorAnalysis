@@ -31,9 +31,10 @@ namespace AuthorAnalysis.TextProcessor
         {
             ResetVariables();
             wordCount = book.Text.Split(' ').Count(word =>!String.IsNullOrEmpty(word));
+            Dictionary<string, int> entities = new Dictionary<string, int>();
             punctCount = book.Text.Count(c => Char.IsPunctuation(c));
             
-            var pipeline = PipelineBuilder.GetPipeLine();
+            var pipeline = PipelineBuilder.GetPipeLineWithNamedEntities();
 
             // Annotation
             var annotation = new Annotation(book.Text);
@@ -58,11 +59,22 @@ namespace AuthorAnalysis.TextProcessor
                     var word = token.get(new CoreAnnotations.TextAnnotation().getClass()) as string;
                     var pos = token.get(new CoreAnnotations.PartOfSpeechAnnotation().getClass()) as string;
                     var ner = token.get(new  CoreAnnotations.NamedEntityTagAnnotation().getClass()) as string;
-                    var normalizedner = token.get(new CoreAnnotations.NormalizedNamedEntityTagAnnotation().getClass());
-                    var time = token.get(new TimeExpression.Annotation().getClass()) as TimeExpression;
-
+                    if (entities.ContainsKey(ner))
+                    {
+                        entities[ner]++;
+                    }
+                    else
+                    {
+                        entities.Add(ner, 1);
+                    }
                     AnalyzePOSTag(pos);
                 }
+            }
+
+
+            foreach (var entity in entities)
+            {
+                book.NamedEntities.Add(new NamedEntity() { BookID = book.BookID, NamedEntity1 = entity.Key, NumberOfOccurences = entity.Value });
             }
 
             book.AdjectiveToWordRatio = adjCount / wordCount;
@@ -115,6 +127,44 @@ namespace AuthorAnalysis.TextProcessor
             advCount = 0;
             punctCount = 0;
 
+        }
+
+        public static void AddNamedEntity(List<Book> books)
+        {
+            var pipeline = PipelineBuilder.GetPipeLineWithNamedEntities();
+            int counter = 1;
+            foreach (var book in books)
+            {
+                Dictionary<string, int> entities = new Dictionary<string, int>();
+                var annotation = new Annotation(book.Text);
+                pipeline.annotate(annotation);
+                var sentences = annotation.get(new CoreAnnotations.SentencesAnnotation().getClass()) as ArrayList;
+                foreach (CoreMap sentence in sentences)
+                {
+                    var tokens = sentence.get(new
+                    CoreAnnotations.TokensAnnotation().getClass()) as ArrayList;
+                    foreach (CoreLabel token in tokens)
+                    {
+                        
+                        var ner = token.get(new
+                        CoreAnnotations.NamedEntityTagAnnotation().getClass()) as string;
+                        if(entities.ContainsKey(ner))
+                        {
+                            entities[ner]++;
+                        }
+                        else
+                        {
+                            entities.Add(ner, 1);
+                        }
+                    }
+                }
+
+                foreach(var entity in entities)
+                {
+                    book.NamedEntities.Add(new NamedEntity() { NamedEntityID = counter, BookID = book.BookID, NamedEntity1 = entity.Key, NumberOfOccurences = entity.Value });
+                    counter++;
+                }
+            }
         }
     }
 }

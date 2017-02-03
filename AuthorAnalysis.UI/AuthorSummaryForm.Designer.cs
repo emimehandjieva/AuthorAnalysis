@@ -40,7 +40,7 @@
             // textBoxAuthorName
             // 
             this.textBoxAuthorName.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.textBoxAuthorName.Location = new System.Drawing.Point(336, 12);
+            this.textBoxAuthorName.Location = new System.Drawing.Point(336, 72);
             this.textBoxAuthorName.Name = "textBoxAuthorName";
             this.textBoxAuthorName.Size = new System.Drawing.Size(309, 22);
             this.textBoxAuthorName.TabIndex = 1;
@@ -50,7 +50,7 @@
             // 
             this.buttonGO.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.buttonGO.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonGO.Location = new System.Drawing.Point(453, 72);
+            this.buttonGO.Location = new System.Drawing.Point(454, 100);
             this.buttonGO.Name = "buttonGO";
             this.buttonGO.Size = new System.Drawing.Size(75, 35);
             this.buttonGO.TabIndex = 2;
@@ -81,7 +81,7 @@
             // progressBar1
             // 
             this.progressBar1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.progressBar1.Location = new System.Drawing.Point(336, 125);
+            this.progressBar1.Location = new System.Drawing.Point(336, 141);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(309, 23);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;

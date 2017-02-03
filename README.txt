@@ -1,0 +1,1 @@
+To get the project running ,a stanford-corenlp-3.7.0-models must be added in the flder containing the project. 

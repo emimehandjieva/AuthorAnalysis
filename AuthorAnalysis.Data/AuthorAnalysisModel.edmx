@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AuthorAnalysisDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AuthorAnalysisDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Author">
           <Key>
             <PropertyRef Name="AuthorID" />
@@ -34,29 +34,39 @@
           <Key>
             <PropertyRef Name="EdicationLevelID" />
           </Key>
-          <Property Name="EdicationLevelID" Type="int" Nullable="false" />
+          <Property Name="EdicationLevelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="nchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Gender">
           <Key>
             <PropertyRef Name="GenderID" />
           </Key>
-          <Property Name="GenderID" Type="int" Nullable="false" />
+          <Property Name="GenderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="NamedEntities">
+          <Key>
+            <PropertyRef Name="NamedEntityID" />
+          </Key>
+          <Property Name="BookID" Type="int" Nullable="false" />
+          <Property Name="NamedEntity" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NumberOfOccurences" Type="int" Nullable="false" />
+          <Property Name="NamedEntityID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Nationality">
           <Key>
             <PropertyRef Name="NationalityID" />
           </Key>
-          <Property Name="NationalityID" Type="int" Nullable="false" />
+          <Property Name="NationalityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Period">
           <Key>
             <PropertyRef Name="PeriodID" />
           </Key>
-          <Property Name="PeriodID" Type="int" Nullable="false" />
+          <Property Name="PeriodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PeriodName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PeriodRange" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <Association Name="FK_Author_Education">
           <End Role="Education" Type="Self.Education" Multiplicity="0..1" />
@@ -118,11 +128,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_NamedEntities_Book">
+          <End Role="Book" Type="Self.Book" Multiplicity="1" />
+          <End Role="NamedEntities" Type="Self.NamedEntities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="BookID" />
+            </Principal>
+            <Dependent Role="NamedEntities">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="AuthorAnalysisDataModelStoreContainer">
           <EntitySet Name="Author" EntityType="Self.Author" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NamedEntities" EntityType="Self.NamedEntities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Nationality" EntityType="Self.Nationality" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Author_Education" Association="Self.FK_Author_Education">
@@ -145,9 +168,12 @@
             <End Role="Author" EntitySet="Author" />
             <End Role="Book" EntitySet="Book" />
           </AssociationSet>
+          <AssociationSet Name="FK_NamedEntities_Book" Association="Self.FK_NamedEntities_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="NamedEntities" EntitySet="NamedEntities" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AuthorAnalysisDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -181,6 +207,7 @@
           <Property Name="AdverbToWordRatio" Type="Double" Nullable="false" />
           <Property Name="AuthorID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Author" Relationship="Self.FK_Book_Author" FromRole="Book" ToRole="Author" />
+          <NavigationProperty Name="NamedEntities" Relationship="AuthorAnalysisDataModel.FK_NamedEntities_Book" FromRole="Book" ToRole="NamedEntity" />
         </EntityType>
         <EntityType Name="Education">
           <Key>
@@ -213,6 +240,7 @@
           <Property Name="PeriodID" Type="Int32" Nullable="false" />
           <Property Name="PeriodName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Authors" Relationship="Self.FK_Author_Period" FromRole="Period" ToRole="Author" />
+          <Property Name="PeriodRange" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Author_Education">
           <End Role="Education" Type="Self.Education" Multiplicity="0..1" />
@@ -301,7 +329,34 @@
             <End Role="Author" EntitySet="Authors" />
             <End Role="Book" EntitySet="Books" />
           </AssociationSet>
+          <EntitySet Name="NamedEntities" EntityType="AuthorAnalysisDataModel.NamedEntity" />
+          <AssociationSet Name="FK_NamedEntities_Book" Association="AuthorAnalysisDataModel.FK_NamedEntities_Book">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="NamedEntity" EntitySet="NamedEntities" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="NamedEntity">
+          <Key>
+            <PropertyRef Name="NamedEntityID" />
+          </Key>
+          <Property Name="BookID" Type="Int32" Nullable="false" />
+          <Property Name="NamedEntity1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfOccurences" Type="Int32" Nullable="false" />
+          <Property Name="NamedEntityID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Book" Relationship="AuthorAnalysisDataModel.FK_NamedEntities_Book" FromRole="NamedEntity" ToRole="Book" />
+        </EntityType>
+        <Association Name="FK_NamedEntities_Book">
+          <End Type="AuthorAnalysisDataModel.Book" Role="Book" Multiplicity="1" />
+          <End Type="AuthorAnalysisDataModel.NamedEntity" Role="NamedEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="BookID" />
+            </Principal>
+            <Dependent Role="NamedEntity">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -362,8 +417,19 @@
           <EntitySetMapping Name="Periods">
             <EntityTypeMapping TypeName="AuthorAnalysisDataModel.Period">
               <MappingFragment StoreEntitySet="Period">
+                <ScalarProperty Name="PeriodRange" ColumnName="PeriodRange" />
                 <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
                 <ScalarProperty Name="PeriodName" ColumnName="PeriodName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NamedEntities">
+            <EntityTypeMapping TypeName="AuthorAnalysisDataModel.NamedEntity">
+              <MappingFragment StoreEntitySet="NamedEntities">
+                <ScalarProperty Name="NamedEntityID" ColumnName="NamedEntityID" />
+                <ScalarProperty Name="NumberOfOccurences" ColumnName="NumberOfOccurences" />
+                <ScalarProperty Name="NamedEntity1" ColumnName="NamedEntity" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

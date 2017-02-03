@@ -22,6 +22,7 @@ namespace AuthorAnalysis.Data
     
         public int PeriodID { get; set; }
         public string PeriodName { get; set; }
+        public string PeriodRange { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Author> Authors { get; set; }

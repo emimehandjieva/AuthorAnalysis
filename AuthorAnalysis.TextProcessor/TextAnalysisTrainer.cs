@@ -17,12 +17,11 @@ namespace AuthorAnalysis.TextProcessor
     {
         private static List<string> _stopWords;
 
-        private static int K = 10;
+        private static int K = 5;
 
-        public static void SVM(Book newBook, List<Book> oldBooks)
+        public static void SVM(Book newBook, List<Book> oldBooks, Author author)
         {
-            double[][] inputs = oldBooks.Select(book => new double[] { book.Similarity,
-                                                                       book.AverageSentenceWordCount,
+            double[][] inputs = oldBooks.Select(book => new double[] { book.AverageSentenceWordCount,
                                                                        book.PunctoationToWordRatio ,
                                                                        book.NounToWordRatio ,
                                                                        book.VerbToWordRatio,
@@ -30,7 +29,7 @@ namespace AuthorAnalysis.TextProcessor
                                                                        book.AdverbToWordRatio
                                                                       }).ToArray();
 
-            int[] outputs = oldBooks.Select(book =>(book.Author.Gender.GenderID)).ToArray();
+            int[] outputs = oldBooks.Select(book => (book.Author.Gender.GenderID)).ToArray();
 
             var learn = new SequentialMinimalOptimization<Gaussian>()
             {
@@ -39,8 +38,7 @@ namespace AuthorAnalysis.TextProcessor
             };
 
             SupportVectorMachine<Gaussian> svm = learn.Learn(inputs, outputs);
-            double[] newBookInput = new double[] { newBook.Similarity,
-                                                 newBook.AverageSentenceWordCount,
+            double[] newBookInput = new double[] {newBook.AverageSentenceWordCount,
                                                  newBook.PunctoationToWordRatio ,
                                                  newBook.NounToWordRatio ,
                                                  newBook.VerbToWordRatio,
@@ -48,28 +46,29 @@ namespace AuthorAnalysis.TextProcessor
                                                  newBook.AdverbToWordRatio
                                                  };
             int newGender = (int)svm.Score(newBookInput);
-            newBook.Author.GenderID = newGender;
+            author.GenderID = newGender;
         }
 
 
 
-        public static void Classify(Book newBook, List<Book> oldBooks)
+        public static void Classify(Book newBook, List<Book> oldBooks, Author author)
         {
             IncludeStopWords();
 
             foreach (Book book in oldBooks)
             {
-                book.Similarity = CompareSimilarity(newBook, book) / CompareDifferences(newBook, book);
+                book.Similarity = (CompareSimilarity(newBook, book) + CompareNERSimilarity(newBook, book)) / CompareDifferences(newBook, book) ;
             }
 
             var chosen = oldBooks.OrderBy(b => b.Similarity).Take(K);
-            
-            newBook.Author.Nationality = chosen.Select(b => b.Author.Nationality).GroupBy(item => item).OrderByDescending(g => g.Count()).Select(g => g.Key).First();
-            newBook.Author.Period = chosen.Select(b => b.Author.Period).GroupBy(item => item).OrderByDescending(g => g.Count()).Select(g => g.Key).First();
-            newBook.Author.Education = chosen.Select(b => b.Author.Education).GroupBy(item => item).OrderByDescending(g => g.Count()).Select(g => g.Key).First();
 
-            SVM(newBook, oldBooks);
+            author.Nationality = chosen.Select(b => b.Author.Nationality).GroupBy(item => item).OrderByDescending(g => g.Count()).Select(g => g.Key).First();
+            author.Period = chosen.Select(b => b.Author.Period).GroupBy(item => item).OrderByDescending(g => g.Count()).Select(g => g.Key).First();
+            author.Education = chosen.Select(b => b.Author.Education).GroupBy(item => item).OrderByDescending(g => g.Count()).Select(g => g.Key).First();
+
+            SVM(newBook, oldBooks, author);
         }
+
 
         private static double CompareDifferences(Book newBook, Book oldBook)
         {
@@ -81,6 +80,23 @@ namespace AuthorAnalysis.TextProcessor
                             (newBook.AdverbToWordRatio - oldBook.AdverbToWordRatio));
         }
 
+        private static double CompareNERSimilarity(Book newBook, Book oldBook)
+        {
+            double difference = 0;
+            foreach (var entity in newBook.NamedEntities)
+            {
+                if (oldBook.NamedEntities.Count(e => e.NamedEntity1 == entity.NamedEntity1) > 0)
+                {
+                    difference += Math.Abs(oldBook.NamedEntities.FirstOrDefault(e => e.NamedEntity1 == entity.NamedEntity1).NumberOfOccurences - entity.NumberOfOccurences);
+                }
+                else
+                {
+                    difference += entity.NumberOfOccurences;
+                }
+            }
+            return difference / newBook.Text.Length;
+        }
+
         public static double CompareSimilarity(Book newBook, Book oldBook)
         {
             string[] words1 = EatWhiteChar(newBook.Text);
@@ -90,10 +106,6 @@ namespace AuthorAnalysis.TextProcessor
             Dictionary<string, double> frequencyTable1 = PrepareFrequency(words1);
             Dictionary<string, double> frequencyTable2 = PrepareFrequency(words2);
 
-            //foreach (KeyValuePair<string, double> kv in frequencyTable1)
-            //{
-            //    Console.WriteLine("The word : {0} has repeated {1}", kv.Key, kv.Value);
-            //}
 
             Dictionary<string, double> tfTable1 = TfFactorized(frequencyTable1);
             Dictionary<string, double> tfTable2 = TfFactorized(frequencyTable2);

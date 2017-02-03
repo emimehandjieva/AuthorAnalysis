@@ -79,6 +79,9 @@
     <Compile Include="Gender.cs">
       <DependentUpon>AuthorAnalysisModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="NamedEntity.cs">
+      <DependentUpon>AuthorAnalysisModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Nationality.cs">
       <DependentUpon>AuthorAnalysisModel.tt</DependentUpon>
     </Compile>

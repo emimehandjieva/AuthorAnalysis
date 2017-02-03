@@ -73,3 +73,4 @@ C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnaly
 C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\Remotion.Interfaces.dll
 C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\LinqToExcel.xml
 C:\Users\Emilia\Documents\Visual Studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\bin\Debug\log4net.xml
+C:\Users\Emilia\documents\visual studio 2015\Projects\AuthorAnalysis\AuthorAnalysis.UI\obj\Debug\AuthorAnalysis.UI.FeedBackForm.resources
